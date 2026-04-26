@@ -3,7 +3,6 @@ package handler
 import (
 	"be_latihan/model"
 	"be_latihan/repository"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -25,11 +24,10 @@ func GetAllMahasiswa(c *fiber.Ctx) error {
 }
 
 func GetMahasiswaByNPM(c *fiber.Ctx) error {
-	npm, err := strconv.ParseInt(c.Params("npm"), 10, 64)
-	if err != nil {
+	npm := c.Params("npm")
+	if npm == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{
 			Message: "npm tidak valid",
-			Error:   err.Error(),
 		})
 	}
 
@@ -77,11 +75,10 @@ func InsertMahasiswa(c *fiber.Ctx) error {
 }
 
 func UpdateMahasiswa(c *fiber.Ctx) error {
-	npm, err := strconv.ParseInt(c.Params("npm"), 10, 64)
-	if err != nil {
+	npm := c.Params("npm")
+	if npm == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{
 			Message: "npm tidak valid",
-			Error:   err.Error(),
 		})
 	}
 
@@ -114,11 +111,10 @@ func UpdateMahasiswa(c *fiber.Ctx) error {
 }
 
 func DeleteMahasiswa(c *fiber.Ctx) error {
-	npm, err := strconv.ParseInt(c.Params("npm"), 10, 64)
-	if err != nil {
+	npm := c.Params("npm")
+	if npm == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{
 			Message: "npm tidak valid",
-			Error:   err.Error(),
 		})
 	}
 
